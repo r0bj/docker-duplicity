@@ -23,4 +23,7 @@ RUN wget -qO /tmp/${DUPLICITY}.tar.gz https://code.launchpad.net/duplicity/0.7-s
 COPY duplicity-backup.sh /duplicity-backup.sh
 RUN chmod +x /duplicity-backup.sh
 
-CMD ["/duplicity-backup.sh"]
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+CMD ["/docker-entrypoint.sh"]
