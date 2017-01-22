@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
-	&& apt-get install -y wget curl python-pip librsync-dev rsync \
+	&& apt-get install -y wget curl python-pip librsync-dev rsync lftp \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
