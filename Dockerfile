@@ -14,7 +14,7 @@ RUN wget -qO /tmp/${ZABBIX_AGENT}.tar.gz http://www.zabbix.com/downloads/${ZABBI
 	&& cp /tmp/${ZABBIX_AGENT}/bin/zabbix_sender /usr/bin/zabbix_sender \
 	&& rm -rf /tmp/${ZABBIX_AGENT}.tar.gz /tmp/${ZABBIX_AGENT}
 
-ENV DUPLICITY_VERSION="0.7.10"
+ENV DUPLICITY_VERSION="0.7.17"
 ENV DUPLICITY="duplicity-$DUPLICITY_VERSION"
 RUN wget -qO /tmp/${DUPLICITY}.tar.gz https://code.launchpad.net/duplicity/0.7-series/${DUPLICITY_VERSION}/+download/${DUPLICITY}.tar.gz \
 	&& pip install /tmp/${DUPLICITY}.tar.gz boto urllib3 \
