@@ -59,7 +59,7 @@ function notify_prometheus {
 	if [ -n "$prometheus_pushgateway_url" ] && [ -n "$prometheus_job" ]; then
 		write_log "INFO: notify prometheus: success: $success; duration: $duration"
 		if [ "$success" -eq 1 ]; then
-cat <<EOF | curl -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
+cat <<EOF | curl -s -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
 # HELP batchjob_duration_seconds Duration of batch job
 # TYPE batchjob_duration_seconds gauge
 batchjob_duration_seconds $duration
@@ -71,7 +71,7 @@ batchjob_last_success $(date +%s.%7N)
 batchjob_success 1
 EOF
 		else
-cat <<EOF | curl -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
+cat <<EOF | curl -s -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
 # HELP batchjob_success Success of batch job
 # TYPE batchjob_success gauge
 batchjob_success 0
