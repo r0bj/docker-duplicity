@@ -96,7 +96,7 @@ fi
 exec 5>&1
 output="`duplicity --full-if-older-than=$full_if_older_than $opts $backup_path $url 2>&1 | tee -a /dev/fd/5`"
 
-if [ "`echo "$output" | grep -P '^Errors 0'`" ]; then
+if [ "`echo "$output" | grep -E '^Errors 0'`" ]; then
 	write_log "INFO: duplicity remove old backups"
 	duplicity remove-older-than $remove_older_than $opts --force $url 2>&1
 

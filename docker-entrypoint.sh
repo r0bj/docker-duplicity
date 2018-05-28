@@ -1,8 +1,12 @@
 #!/bin/bash
 
-if [ -n "$TZ" ] && [ -e /usr/share/zoneinfo/$TZ ]; then
-	ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
-	dpkg-reconfigure -f noninteractive tzdata 2>/dev/null
+if [ -n "$TZ" ]; then
+	apk add --no-cache tzdata
+	if [ -f /usr/share/zoneinfo/$TZ ]; then
+		cp /usr/share/zoneinfo/$TZ /etc/localtime
+	echo "$TZ" >/etc/timezone
+	fi
+	apk del tzdata
 fi
 
 exec /duplicity-backup.sh
