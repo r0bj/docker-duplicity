@@ -63,17 +63,17 @@ cat <<EOF | curl -s -XPOST --data-binary @- ${prometheus_pushgateway_url}/metric
 # HELP batchjob_duration_seconds Duration of batch job
 # TYPE batchjob_duration_seconds gauge
 batchjob_duration_seconds $duration
-# HELP batchjob_last_success Unixtime batch job last succeeded
-# TYPE batchjob_last_success gauge
+# HELP batchjob_last_success_timestamp_seconds Unixtime batch job last succeeded
+# TYPE batchjob_last_success_timestamp_seconds gauge
 batchjob_last_success $(date +%s.%7N)
-# HELP batchjob_success Success of batch job
-# TYPE batchjob_success gauge
+# HELP batchjob_last_success Success of batch job
+# TYPE batchjob_last_success gauge
 batchjob_success 1
 EOF
 		else
 cat <<EOF | curl -s -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
-# HELP batchjob_success Success of batch job
-# TYPE batchjob_success gauge
+# HELP batchjob_last_success Success of batch job
+# TYPE batchjob_last_success gauge
 batchjob_success 0
 EOF
 		fi
