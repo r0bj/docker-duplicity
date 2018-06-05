@@ -60,21 +60,21 @@ function notify_prometheus {
 		write_log "INFO: notify prometheus: success: $success; duration: $duration"
 		if [ "$success" -eq 1 ]; then
 cat <<EOF | curl -s -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
-# HELP batchjob_duration_seconds Duration of batch job
-# TYPE batchjob_duration_seconds gauge
-batchjob_duration_seconds $duration
-# HELP batchjob_last_success_timestamp_seconds Unixtime batch job last succeeded
-# TYPE batchjob_last_success_timestamp_seconds gauge
-batchjob_last_success_timestamp_seconds $(date +%s.%7N)
-# HELP batchjob_last_success Success of batch job
-# TYPE batchjob_last_success gauge
-batchjob_last_success 1
+# HELP duplicity_backup_duration_seconds Duration of duplicity backup
+# TYPE duplicity_backup_duration_seconds gauge
+duplicity_backup_duration_seconds $duration
+# HELP duplicity_backup_last_success_timestamp_seconds Unixtime duplicity backup last succeeded
+# TYPE duplicity_backup_last_success_timestamp_seconds gauge
+duplicity_backup_last_success_timestamp_seconds $(date +%s.%7N)
+# HELP duplicity_backup_last_success Success of duplicity backup
+# TYPE duplicity_backup_last_success gauge
+duplicity_backup_last_success 1
 EOF
 		else
 cat <<EOF | curl -s -XPOST --data-binary @- ${prometheus_pushgateway_url}/metrics/job/${prometheus_job}/instance/$hostname
-# HELP batchjob_last_success Success of batch job
-# TYPE batchjob_last_success gauge
-batchjob_last_success 0
+# HELP duplicity_backup_last_success Success of duplicity backup
+# TYPE duplicity_backup_last_success gauge
+duplicity_backup_last_success 0
 EOF
 		fi
 	fi
